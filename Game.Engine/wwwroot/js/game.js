@@ -38,10 +38,8 @@ var lastPosition = false;
 Controls.registerCanvas(canvas);
 
 var connection = new Connection();
-if (window.location.hash) 
-    connection.connect(window.location.hash.substring(1));
-else
-    connection.connect();
+if (window.location.hash) connection.connect(window.location.hash.substring(1));
+else connection.connect();
 
 window.Game.primaryConnection = connection;
 window.Game.isBackgrounded = false;
@@ -152,7 +150,7 @@ connection.onView = function(newView) {
     Game.Stats.spectatorCount = newView.spectatorCount();
 
     renderer.worldSize = newView.worldSize();
-    
+
     /*console.log({
         playerCount: Game.Stats.playerCount,
         cooldownBoost: newView.cooldownBoost(),
@@ -166,13 +164,10 @@ var lastControl = {};
 
 setInterval(function() {
     if (angle !== lastControl.angle || aimTarget.X !== aimTarget.X || aimTarget.Y !== aimTarget.Y || Controls.boost !== lastControl.boost || Controls.shoot !== lastControl.shoot) {
-
         var spectateControl = false;
         if (isSpectating) {
-            if (Controls.shoot)
-                spectateControl = "action:next";
-            else
-                spectateControl = "spectating";
+            if (Controls.shoot) spectateControl = "action:next";
+            else spectateControl = "spectating";
         }
 
         connection.sendControl(angle, Controls.boost, Controls.shoot, aimTarget.X, aimTarget.Y, spectateControl);
@@ -186,12 +181,12 @@ setInterval(function() {
     }
 }, 10);
 
-document.getElementById("worldSelector").addEventListener("change", function () {
+document.getElementById("worldSelector").addEventListener("change", function() {
     cache.clear();
     connection.connect(document.getElementById("worldSelector").value);
 });
 
-document.getElementById("spawn").addEventListener("click", function () {
+document.getElementById("spawn").addEventListener("click", function() {
     connection.sendSpawn(Controls.nick, Controls.color, Controls.ship, token);
 });
 
@@ -200,7 +195,7 @@ function startSpectate() {
     document.body.classList.add("spectating");
 }
 
-document.getElementById("spectate").addEventListener("click", function () {
+document.getElementById("spectate").addEventListener("click", function() {
     startSpectate();
 });
 
@@ -250,9 +245,7 @@ function doPing() {
     if (frameCounter === 0) {
         console.log("backgrounded");
         Game.isBackgrounded = true;
-    }
-    else
-        Game.isBackgrounded = false;
+    } else Game.isBackgrounded = false;
     frameCounter = 0;
     viewCounter = 0;
     updateCounter = 0;
@@ -316,10 +309,10 @@ requestAnimationFrame(gameLoop);
 
 function parseQuery(queryString) {
     var query = {};
-    var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+    var pairs = (queryString[0] === "?" ? queryString.substr(1) : queryString).split("&");
     for (var i = 0; i < pairs.length; i++) {
-        var pair = pairs[i].split('=');
-        query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+        var pair = pairs[i].split("=");
+        query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
     }
     return query;
 }

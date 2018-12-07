@@ -133,9 +133,8 @@ export class Renderer {
             ctx.rect(-this.worldSize, -this.worldSize, 2 * this.worldSize, 2 * this.worldSize);
             ctx.stroke();
 
-
             // draw red transparent buffer outside the edge of the world
-            /*  
+            /*
              *  ________________
              * |       top      |
              * |________________|
@@ -145,13 +144,13 @@ export class Renderer {
              * |___|________|___|
              * |     bottom     |
              * |________________|
-             * 
+             *
              */
 
             ctx.fillStyle = "rgba(255,0,0,0.1)";
 
             // top
-            ctx.fillRect(-this.worldSize - edgeWidth, -this.worldSize - edgeWidth, 2 * this.worldSize + 2*edgeWidth, edgeWidth);
+            ctx.fillRect(-this.worldSize - edgeWidth, -this.worldSize - edgeWidth, 2 * this.worldSize + 2 * edgeWidth, edgeWidth);
 
             // left
             ctx.fillRect(-this.worldSize - edgeWidth, -this.worldSize, edgeWidth, 2 * this.worldSize);
@@ -236,8 +235,7 @@ export class Renderer {
                     ctx.rotate(position.Angle);
                     ctx.scale(sprite.scale, sprite.scale);
 
-                    if (sprite.scaleToSize)
-                        ctx.scale(object.Size, object.Size);
+                    if (sprite.scaleToSize) ctx.scale(object.Size, object.Size);
 
                     ctx.drawImage(sprite.image, -spriteWidth / 2, -spriteHeight / 2, spriteWidth, spriteHeight);
 

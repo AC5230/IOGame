@@ -20,9 +20,9 @@ function save() {
     var cookieOptions = { expires: 300 };
 
     Settings.theme = document.getElementById("settingsThemeSelector").value;
-    Settings.themeCustom = document.getElementById("settingsThemeSelectorCustom").value
+    Settings.themeCustom = document.getElementById("settingsThemeSelectorCustom").value;
 
-    Settings.background = document.getElementById("settingsBackground").value
+    Settings.background = document.getElementById("settingsBackground").value;
     Settings.mouseScale = document.getElementById("settingsMouseScale").value;
     Settings.font = document.getElementById("settingsFont").value;
     Settings.leaderboardEnabled = document.getElementById("settingsLeaderboardEnabled").checked;
@@ -31,7 +31,7 @@ function save() {
     Settings.hudEnabled = document.getElementById("settingsHUDEnabled").checked;
     Settings.showHitboxes = document.getElementById("settingsShowHitboxes").checked;
 
-    Cookies.set("settings", Settings, cookieOptions)
+    Cookies.set("settings", Settings, cookieOptions);
 }
 
 function reset() {
@@ -45,8 +45,7 @@ function load() {
         if (savedSettings) {
             // copying value by value because cookies can be old versions
             // any values NOT in the cookie will remain defined with the new defaults
-            for (var key in savedSettings) 
-                Settings[key] = savedSettings[key];
+            for (var key in savedSettings) Settings[key] = savedSettings[key];
         }
 
         document.getElementById("settingsThemeSelector").value = Settings.theme;
@@ -66,9 +65,7 @@ function load() {
         } else if (Settings.theme) {
             theme(Settings.theme);
         } // no good way to reset to default :(
-    }
-    catch
-    {
+    } catch {
         // maybe reset()? will make debugging difficult
     }
 }
@@ -116,19 +113,18 @@ document.getElementById("settings").addEventListener("click", function() {
     gear.classList.remove("closed");
 });
 
-document.getElementById("settingsCancel").addEventListener("click", function () {
+document.getElementById("settingsCancel").addEventListener("click", function() {
     gear.classList.add("closed");
 });
 
-document.getElementById("settingsSave").addEventListener("click", function () {
-
+document.getElementById("settingsSave").addEventListener("click", function() {
     save();
     load();
 
     gear.classList.add("closed");
 });
 
-document.getElementById("settingsReset").addEventListener("click", function () {
+document.getElementById("settingsReset").addEventListener("click", function() {
     reset();
     window.location.reload();
 });

@@ -15,8 +15,7 @@ export class Leaderboard {
     draw(relativeTo) {
         const ctx = this.context;
 
-        if (!Settings.leaderboardEnabled)
-            return;
+        if (!Settings.leaderboardEnabled) return;
 
         ctx.save();
         if (this.data && this.data.Entries) {
@@ -31,15 +30,14 @@ export class Leaderboard {
 
             if (this.data.Type == "Team") {
                 var self = this;
-                var findTeam = function (teamName) {
+                var findTeam = function(teamName) {
                     for (var i = 0; i < self.data.Entries.length; i++) {
-                        if (self.data.Entries[i].Name == teamName)
-                            return self.data.Entries[i];
+                        if (self.data.Entries[i].Name == teamName) return self.data.Entries[i];
                     }
                     return false;
-                }
+                };
 
-                var cyan = findTeam("cyan") || { Score: 0};
+                var cyan = findTeam("cyan") || { Score: 0 };
                 var red = findTeam("red") || { Score: 0 };
 
                 var cyanScore = Math.min(cyan.Score, 5);
@@ -50,25 +48,18 @@ export class Leaderboard {
                 var w = 300;
                 var h = 100;
 
-                var draw = function (sprite) {
-                    if (sprites.hasOwnProperty(sprite))
-                        ctx.drawImage(sprites[sprite].image, x, y, w, h);
-                }
+                var draw = function(sprite) {
+                    if (sprites.hasOwnProperty(sprite)) ctx.drawImage(sprites[sprite].image, x, y, w, h);
+                };
 
                 draw("ctf_score_stripes");
                 draw(`ctf_score_left_${Math.min(cyanScore, 4)}`);
                 draw(`ctf_score_right_${Math.min(redScore, 4)}`);
 
-                if (cyan.Score == 5)
-                    draw("ctf_score_final_blue");
-                else if (red.Score == 5)
-                    draw("ctf_score_final_red");
-                else
-                    draw("ctf_score_final");
-            }
-            else {
-
-
+                if (cyan.Score == 5) draw("ctf_score_final_blue");
+                else if (red.Score == 5) draw("ctf_score_final_red");
+                else draw("ctf_score_final");
+            } else {
                 for (let i = 0; i < this.data.Entries.length; i++) {
                     const entry = this.data.Entries[i];
 
